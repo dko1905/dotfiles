@@ -4,6 +4,9 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt beep extendedglob
 
+# Fix FUCKING gpg2 bug
+export GPG_TTY=$(tty)
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -16,3 +19,4 @@ if ! zgen saved; then
 
 	zgen save
 fi
+
