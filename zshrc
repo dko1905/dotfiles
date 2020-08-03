@@ -6,6 +6,8 @@ setopt beep extendedglob
 
 # Fix FUCKING gpg2 bug
 export GPG_TTY=$(tty)
+# Use vim
+export EDITOR=vim
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
