@@ -9,6 +9,11 @@ export GPG_TTY=$(tty)
 # Use vim
 export EDITOR=vim
 
+alias xi='xbps-install -S'
+alias xr='xbps-remove -R'
+alias xq='xbps-query -R'
+alias xs='xbps-query -Rs'
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -21,4 +26,3 @@ if ! zgen saved; then
 
 	zgen save
 fi
-
