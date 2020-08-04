@@ -4,19 +4,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt beep extendedglob
 
-# Fix FUCKING gpg2 bug
-export GPG_TTY=$(tty)
-# Use vim
-export EDITOR=vim
-
-alias xi='xbps-install -S'
-alias xr='xbps-remove -R'
-alias xq='xbps-query -R'
-alias xs='xbps-query -Rs'
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
 source ~/.zgen/zgen.zsh
 
 if ! zgen saved; then
@@ -25,4 +12,25 @@ if ! zgen saved; then
 	zgen oh-my-zsh themes/gentoo
 
 	zgen save
+fi
+
+# Fix FUCKING gpg2 bug
+export GPG_TTY=$(tty)
+# Use vim
+export EDITOR=vim
+
+# Best aliases ever
+alias sls='/bin/ls -lh --color=auto'
+alias ls='exa -lh'
+
+# Rarely use these
+alias xi='xbps-install -S'
+alias xr='xbps-remove -R'
+alias xq='xbps-query -R'
+alias xs='xbps-query -Rs'
+
+if [ -n "$DISPLAY" ]; then
+	echo "ok" > /dev/null
+else
+	export DISPLAY=:0
 fi
