@@ -10,8 +10,8 @@ super + shift + Return
 	alacritty -e lxc exec dev bash
 
 # program launcher
-super + @space
-	dmenu_run
+super + space
+	dmenu_run -i
 
 # make sxhkd reload its configuration files:
 super + Escape

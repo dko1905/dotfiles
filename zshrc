@@ -2,7 +2,6 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-setopt beep extendedglob
 
 source ~/.zgen/zgen.zsh
 
@@ -29,8 +28,11 @@ alias xr='xbps-remove -R'
 alias xq='xbps-query -R'
 alias xs='xbps-query -Rs'
 
+# Setup display on lxd
 if [ -n "$DISPLAY" ]; then
 	echo "ok" > /dev/null
 else
+	# I use this place as a lxd test
 	export DISPLAY=:0
+	export PATH=$PATH:/snap/bin
 fi
