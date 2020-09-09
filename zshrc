@@ -1,38 +1,37 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+# Zsh config
 
-source ~/.zgen/zgen.zsh
+# Requirements
+# You need to have zgen installed under `.zgen`
+# You need to copy the custom theme manually
+# Vim
+# Exa
 
+
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
+
+# if the init script doesn't exist
 if ! zgen saved; then
-	# Oh-my-zsh plugins
+	# specify plugins here
 	zgen oh-my-zsh
-	zgen oh-my-zsh themes/gentoo
 
+	
+	zgen oh-my-zsh plugins/git
+	zgen oh-my-zsh custom/themes/custom1.zsh-theme
+	zgen load zsh-users/zsh-autosuggestions
+
+	# generate the init script from plugins above
 	zgen save
 fi
 
-# Fix FUCKING gpg2 bug
+# Fix gnupg
 export GPG_TTY=$(tty)
-# Use vim
 export EDITOR=vim
 
-# Best aliases ever
-alias sls='/bin/ls -lh --color=auto'
-alias ls='exa -lh'
+# Aliases
+alias sls='/usr/bin/ls -lh --color=auto'; # Standard ls
+alias ls='exa -lh'; # Better than ls
 
-# Rarely use these
-alias xi='xbps-install -S'
-alias xr='xbps-remove -R'
-alias xq='xbps-query -R'
-alias xs='xbps-query -Rs'
-
-# Setup display on lxd
-if [ -n "$DISPLAY" ]; then
-	echo "ok" > /dev/null
-else
-	# I use this place as a lxd test
-	export DISPLAY=:0
-	export PATH=$PATH:/snap/bin
-fi
+# Setup zsh-autosuggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bold";
+export PATH=$PATH:/home/daniel/.local/bin
