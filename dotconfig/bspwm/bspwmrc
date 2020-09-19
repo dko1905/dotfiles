@@ -10,8 +10,10 @@ amixer set Headphone 75%
 sxhkd &
 # Start polybar
 ~/.config/polybar/launch.sh
-# Set background
-feh --bg-fill /usr/share/wallpapers/lake.jpg
+# Set background and snow
+#feh --bg-fill /usr/share/wallpapers/lake.jpg
+xsetroot -solid darkgray
+~/.config/xsnow/launch.sh
 # Fix java
 wmname LG3D
 # Setup keyboard
