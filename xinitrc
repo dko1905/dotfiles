@@ -1,5 +1,27 @@
-xrandr --newmode "1920x1080_60.00" 172.80 1920 2040 2248 2576 1080 1081 1084 1118 -HSync +Vsync 
-xrandr --addmode eDP-1 "1920x1080_60.00" 
-xrandr --output eDP-1 --mode "1920x1080_60.00"
+#!/bin/sh
 
-dbus-run-session bspwm
+# Get currently connected screens
+SCREENS=$(xrandr | grep " connected " | awk '{ print$1 }')
+LAPEEN=$(echo $SCREENS | grep -woE 'eDP-?1') # Laptop screen
+
+# If extern monitor is connected
+SCREEN=$(echo $SCREENS | grep -woE 'DP-?1')
+if [ ! -z "$SCREEN" ]; then
+	printf "Using %s\n" "$SCREEN"
+	xrandr --output $LAPEEN --off
+	xrandr --output $SCREEN --auto
+else
+	SCREEN=$LAPEEN
+	printf "Using %s\n" "$SCREEN"
+	xrandr --output $SCREEN --mode 1920x1080 --auto
+fi
+
+pkill -x pipewire;
+pkill -x pipewire-pulse;
+
+pipewire &
+pipewire-pulse &
+picom --vsync --experimental-backends --config $HOME/.config/picom/picom.conf &
+
+exec dbus-run-session -- bspwm
+
