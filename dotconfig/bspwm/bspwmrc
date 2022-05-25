@@ -1,31 +1,29 @@
-#! /bin/sh
+#!/bin/sh
 
-
-# Set headphone volumne
-amixer set Headphone 75%
-
-# Start picom
-~/.config/picom/launch.sh
+# Set wallpaper
+nitrogen --restore &
+# NetworkManager applet
+pkill -x nm-applet; nm-applet &
 # Start hotkey deamon
-sxhkd &
+pkill -x sxhkd; sxhkd &
 # Start polybar
-~/.config/polybar/launch.sh
-# Set background and snow
-#feh --bg-fill /usr/share/wallpapers/lake.jpg
-xsetroot -solid darkgray
-~/.config/xsnow/launch.sh
+pkill -x polybar; polybar coolbar &
 # Fix java
 wmname LG3D
-# Setup keyboard
-setxkbmap -option grp:alt_shift_toggle us,dk &
+# Lockscreen
+light-locker &
 
 bspc monitor -d I II III IV V VI VII VIII IX
+
+bspc rule -a *:st_float state=floating
+bspc rule -a *:Origin state=floating
 
 bspc config border_width         2
 bspc config window_gap          12
 
 bspc config split_ratio          0.52
+bspc config top_padding          36
+bspc config ignore_ewmh_struts   true
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a firefox desktop='^2'
