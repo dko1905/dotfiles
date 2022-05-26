@@ -4,18 +4,23 @@
 
 # terminal emulator
 super + Return
-	alacritty
+	st
 
 super + shift + Return
-	alacritty -e lxc exec dev bash
+	st -n st_float
 
 # program launcher
 super + space
-	dmenu_run -i
+	drun
+super + shift + space
+	drun-prime
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+super + alt + w
+	light-locker-command -l
 
 #
 # custom keys
@@ -27,13 +32,20 @@ XF86MonBrightnessDown
 	xbacklight -dec 10
 
 XF86AudioRaiseVolume
-	amixer set Master 2dB+
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 XF86AudioLowerVolume
-	amixer set Master 2dB-
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 XF86AudioMute
-	amixer set Master togglemute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+Print
+	flameshot gui
+
+shift + Print
+	flameshot screen -c
+
 #
 # bspwm hotkeys
 #
